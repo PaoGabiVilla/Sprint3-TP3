@@ -18,3 +18,7 @@ export async function obtenerSuperheroesMenoresDe30() {
     return await superHeroRepository.obtenerMenoresDe30()
     
 }
+//sprint 3 tp1
+export async function crearNuevoSuperheroe(datosNuevoSuperheroe) {
+    return await superHeroRepository.crearSuperheroe(datosNuevoSuperheroe)
+}
