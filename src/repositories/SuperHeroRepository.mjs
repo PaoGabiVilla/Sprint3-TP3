@@ -1,4 +1,4 @@
-import superHero from '../models/SuperHero.mjs';
+//import superHero from '../models/SuperHero.mjs';
 import SuperHero from '../models/SuperHero.mjs';
 import IRepository from './IRepository.mjs';
 
@@ -35,19 +35,11 @@ class SuperHeroRepository extends IRepository {
     
     //Sprint 3 tp1
     async crearSuperheroe(datosSuperheroe){
-      const superheroe = superHero.create({
-        nombreSuperHeroe: datosSuperheroe.nombreSuperHeroe,
-            nombreReal: datosSuperheroe.nombreReal,
-            edad: datosSuperheroe.edad,
-            planetaOrigen:  datosSuperheroe.planetaOrigen,
-            debilidad: datosSuperheroe.debilidad,
-            poderes: datosSuperheroe.poderes,
-            aliados: datosSuperheroe.aliados,
-            enemigos: datosSuperheroe.enemigos,  
-            })
-        console.log('Superheroe: ${superHero}')
-        return console.log('Super heroes creado for Ktta');
-      }
-    }
-
+     
+        const nuevoHeroe = new SuperHero(datosSuperheroe);
+        await nuevoHeroe.save();
+        console.log(nuevoHeroe);
+        return nuevoHeroe;
+        }
+}
 export default new SuperHeroRepository();
