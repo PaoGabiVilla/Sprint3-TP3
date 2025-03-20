@@ -23,6 +23,6 @@ export async function crearNuevoSuperheroe(datosNuevoSuperheroe) {
     return await SuperHeroRepository.crearSuperheroe(datosNuevoSuperheroe);
 }
 
-export async function actualizarSuperheroe(datosActualizarSuperheroe, idHeroe) {
-    return await superHeroRepository.actualizarHeroe(datosActualizarSuperheroe, idHeroe);
+export async function actualizarSuperheroe(id, datosActualizarSuperheroe) {
+    return await superHeroRepository.actualizarHeroe(id, datosActualizarSuperheroe);
 }
