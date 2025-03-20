@@ -96,39 +96,40 @@ export async function crearNuevoSuperheroeController(req, res) {
 export async function actualizarSuperheroeController(req, res) {
 
     try {
-
-
-
         const { id } = req.params;
-
         const datosActualizar = req.body;
-
-
-
         console.log(id);
-
         console.log(typeof (id));
 
         const superheroeActualizado = await actualizarSuperheroe(id, datosActualizar);
-
-
-
         if (!superheroeActualizado) {
-
             return res.status(404).send({ mensaje: 'Superhéroe a actualizar no encontrado.' });
-
         }
 
-
-
         const superheroeFormateado = renderizarSuperheroe(superheroeActualizado);
-
         res.status(200).json(superheroeFormateado);
 
     } catch (error) {
-
         res.status(500).send({ mensaje: 'Error al actualizar el superhéroe', error: error.message });
-
     }
+}
+
+export async function eliminarSuperheroePorIdController(req, res) {
+    try{
+        const{ id }= req.params;
+        const superheroeEliminado = await eliminarSuperheroePorIdController(id);
+        if (!superheroeEliminado) {
+            return res.status(404).send({ mensaje: 'Superhéroe a aeliminado no encontrado.' });
+        }
+
+        const superheroeFormateado = renderizarSuperheroe(superheroeEliminado);
+        res.status(200).json(superheroeFormateado);
+
+    } catch (error) {
+        res.status(500).send({ mensaje: 'Error al eliminar el superhéroe', error: error.message });
+    }
+}
+
+export async function eliminarSuperheroePorNombreController(req, res){
 
 }

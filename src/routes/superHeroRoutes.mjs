@@ -6,7 +6,9 @@ import {
     obtenerSuperheroesMayoresDe30Controller,
     obtenerSuperheroesMenoresDe30Controller,
     crearNuevoSuperheroeController,
-    actualizarSuperheroeController
+    actualizarSuperheroeController,
+    eliminarSuperheroePorIdController,
+    eliminarSuperheroePorNombreController
 } from '../controllers/superheroesController.mjs';
 
 const router = express.Router();
@@ -17,6 +19,8 @@ router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoContro
 router.get('/heroes/:id', obtenerSuperheroePorIdController);
 router.post('/heroes/crear', crearNuevoSuperheroeController);
 router.put('/heroes/actualizar/:id', actualizarSuperheroeController);
+router.delete('/heroes/eliminar/id/:id', eliminarSuperheroePorIdController);
+router.delete('/heroes/eliminar/nombre/:nombre', eliminarSuperheroePorNombreController);
 
 
 export default router;
