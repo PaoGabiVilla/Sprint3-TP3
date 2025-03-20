@@ -1,4 +1,4 @@
-import { obtenerSuperheroePorId, obtenerTodosLosSuperheroes, buscarSuperheroesPorAtributo, obtenerSuperheroesMayoresDe30, obtenerSuperheroesMenoresDe30, crearNuevoSuperheroe} from "../services/superheroesService.mjs";
+import { obtenerSuperheroePorId, obtenerTodosLosSuperheroes, buscarSuperheroesPorAtributo, obtenerSuperheroesMayoresDe30, obtenerSuperheroesMenoresDe30, crearNuevoSuperheroe, actualizarSuperheroe} from "../services/superheroesService.mjs";
 import { renderizarSuperheroe, renderizarListaSuperheroes} from '../views/responseView.mjs';
 
 export async function obtenerSuperheroePorIdController(req, res) {
@@ -79,13 +79,32 @@ export async function crearNuevoSuperheroeController(req, res) {
     try{
     const datos = req.body;
 
-    const superheroeNuevo = crearNuevoSuperheroe(datos);
-    if(!superheroeNuevo){
+    const superheroeCreado = await crearNuevoSuperheroe(datos);
+    if(!superheroeCreado){
         return res.status(404).send({mensaje:'Superheroe nuevo no encontrado'})}
-        const superheroeFormateado = renderizarSuperheroe(superheroeNuevo);
+        const superheroeFormateado = renderizarSuperheroe(superheroeCreado);
         res.status(200).json(superheroeFormateado);
 
     } catch (error){
         res.status(500).send({ mensaje: 'error al crear nuevo superheroe' })
     }
 }
+
+//modificar
+
+export async function actualizarSuperheroeController(req, res) {
+    try {
+        const datosActualizar = req.body;
+        const idHeroe = req.params;
+       
+        const superheroeActualizado = await actualizarSupheroe(datosActualizar, idHeroe);
+
+        if (!superheroeActualizado){
+            return res.status(404).send({mensaje:'Superheroe a actualizar no encontrado'})
+        }
+            const superheroeFormateado = renderizarSuperheroe(superheroeActualizado);
+            res.status(200).json(superheroeFormateado);
+        } catch (error){
+            res.status(500).send({ mensaje: 'Error al actualizar superheroe' })
+        }
+    }

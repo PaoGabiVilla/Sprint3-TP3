@@ -1,4 +1,5 @@
 //import superHero from '../models/SuperHero.mjs';
+import superHero from '../models/SuperHero.mjs';
 import SuperHero from '../models/SuperHero.mjs';
 import IRepository from './IRepository.mjs';
 
@@ -37,9 +38,17 @@ class SuperHeroRepository extends IRepository {
     async crearSuperheroe(datosSuperheroe){
      
         const nuevoHeroe = new SuperHero(datosSuperheroe);
-        await nuevoHeroe.save();
+
+        return await nuevoHeroe.save()// guarda y retorna en una sola linea
+        /*await nuevoHeroe.save();
         console.log(nuevoHeroe);
-        return nuevoHeroe;
+        return nuevoHeroe;*/
         }
+
+    async actualizarHeroe(datosActualizar, idHeroe){
+        const heroeActualizado = await superHero.updateOne({ id: idHeroe }, { datosActualizar });
+        console.log(heroeActualizado);
+        return( 'Heroe actualizado');
+    }
 }
 export default new SuperHeroRepository();
