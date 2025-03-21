@@ -116,7 +116,7 @@ export async function actualizarSuperheroeController(req, res) {
 
 export async function eliminarSuperheroePorIdController(req, res) {
     try{
-        console.log('Capa controller - función ')
+        console.log('Capa controller - función eliminar por Id');
         const{ id }= req.params;
         const superheroeEliminado = await eliminarSuperheroePorId(id);
         if (!superheroeEliminado) {
@@ -134,6 +134,7 @@ export async function eliminarSuperheroePorIdController(req, res) {
 export async function eliminarSuperheroePorNombreController(req, res){
 
     try{
+        console.log('Capa controller - función eliminar por Nombre');
         const { nombre } = req.params;
         const superheroeEliminado = await eliminarSuperheroePorNombre(nombre);
         if (!superheroeEliminado) {

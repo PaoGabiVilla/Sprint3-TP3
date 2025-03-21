@@ -33,7 +33,7 @@ export async function eliminarSuperheroePorId(id) {
     
 }
 export async function eliminarSuperheroePorNombre(nombre) {
-
+    console.log('Capa Services - función eliminar por Nombre');
     return await superHeroRepository.eliminarPorNombre(nombre);
 
 }
