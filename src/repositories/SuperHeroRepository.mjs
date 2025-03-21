@@ -46,10 +46,24 @@ class SuperHeroRepository extends IRepository {
         async actualizarHeroe(id, datosActualizar) {
         /* updateOne() o updateMany() devuelven el resultado de la operación pero no el documento actualizado
         y findByIdAndUpdate() devuelve el documento actualizado */
-        const heroeActualizado = await SuperHero.findByIdAndUpdate(id, datosActualizar, { new: true });
+            const heroeActualizado = await SuperHero.findByIdAndUpdate(id, datosActualizar, { new: true });
             console.log(heroeActualizado);
             return heroeActualizado;
             
         }
+        async eliminarPorId(id){
+            console.log('Capa Repository - función eliminar por Id');
+            const heroeEliminado = await SuperHero.findByIdAndDelete(id);
+            console.log(heroeEliminado);
+            return heroeEliminado;
+        }
+        
+        async eliminarPorNombre(nombre){
+            console.log('Capa Repository - función eliminar por Nombre');
+            const heroeEliminado = await SuperHero.findOneAndDelete({nombreSuperHeroe: nombre});
+            console.log(heroeEliminado);
+            return heroeEliminado;
+        }
+      
 }
 export default new SuperHeroRepository();

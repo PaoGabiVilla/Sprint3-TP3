@@ -20,9 +20,20 @@ export async function obtenerSuperheroesMenoresDe30() {
 }
 //sprint 3 tp1
 export async function crearNuevoSuperheroe(datosNuevoSuperheroe) {
-    return await SuperHeroRepository.crearSuperheroe(datosNuevoSuperheroe);
+    return await superHeroRepository.crearSuperheroe(datosNuevoSuperheroe);
 }
 
 export async function actualizarSuperheroe(id, datosActualizarSuperheroe) {
     return await superHeroRepository.actualizarHeroe(id, datosActualizarSuperheroe);
+}
+
+export async function eliminarSuperheroePorId(id) {
+    console.log('Capa services - función eliminar por Id');
+    return await superHeroRepository.eliminarPorId(id);
+    
+}
+export async function eliminarSuperheroePorNombre(nombre) {
+
+    return await superHeroRepository.eliminarPorNombre(nombre);
+
 }
