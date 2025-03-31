@@ -7,18 +7,52 @@
 </head>
 <body>
         <h2> Lista de Superheroes</h2>
-        <ul>
-            <% superheroes.forEach(superheroe => { %>
-                <li>Superheroe: <%= superheroe.nombreSuperHeroe %></li>
-                <li>Nombre Real: <%= superheroe.nombreReal %></li>
-                <li>Edad: <%= superheroe.edad %></li>
-                <li>Planeta Origen: <%= superheroe.planetaOrigen %></li>
-                <li>Debilidad: <%= superheroe.debilidad %></li>
-                <li>Poderes: <%= superheroe.poderes %></li>
-                <li>Aliados: <%= superheroe.aliados %></li>
-                <li>Enemigos: <%= superheroe.enemigos %></li>
-                <br>
-            <% }) %>
-        </ul>
+        <table border="2" cellspacing="0" cellspacing="0" cellspadding="10" width="100%">
+            <thead>
+                <tr>
+                <th>Super Heroes: </th>
+                <th>Nombre Real: </th>
+                <th>Edad: </th>
+                <th>Planeta de Origen: </th>
+                <th>Debilidad: </th>
+                <th>Poderes: </th>
+                <th>Aliados: </th>
+                <th>Enemigos: </th>
+                <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% superheroes.forEach(superheroe => { %>
+                    <tr>
+                        <td><%= superheroe.nombreSuperHeroe %></td>
+                        <td><%= superheroe.nombreReal %></td>
+                        <td><%= superheroe.edad %></td>
+                        <td><%= superheroe.planetaOrigen %></td>
+                        <td><%= superheroe.debilidad %></td>
+                        <td>
+                            <% superheroe.poderes.forEach(poder => { %>
+                               <li><%= poder %></li>
+                            <% }) %>
+                        </td>
+                        <td>
+                            <% superheroe.aliados.forEach(aliado => { %>
+                                <li><%= aliado %></li>
+                            <% }) %>
+                        </td>
+                        <td>
+                            <% superheroe.enemigos.forEach(enemigo => { %>
+                                <li><%= enemigo %></li>
+                            <% }) %>
+                        </td>
+                        <td>
+                            <button type="button" onclick="window.location.href='/api/view/editar/<%= superheroe._id %>'">Editar</button>
+                            <br>
+                            <br>
+                            <button type="button">Eliminar</button>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
 </body>
 </html>

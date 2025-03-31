@@ -1,5 +1,6 @@
+//Importación de Mongoose
 import mongoose from 'mongoose';
-
+//Definición del esquema (superheroSchema)
 const superheroSchema = new mongoose.Schema({
     nombreSuperHeroe: { type: String, required: true },
     nombreReal: { type: String, required: true },
@@ -13,4 +14,5 @@ const superheroSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now}
 })
 const superHero = mongoose.model( 'SuperHero', superheroSchema, 'Grupo-06' );
+
 export default superHero
