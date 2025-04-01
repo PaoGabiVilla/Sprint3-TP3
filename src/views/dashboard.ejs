@@ -6,6 +6,15 @@
     <title>Superheroes</title>
 </head>
 <body>
+
+    <!-- Mostrar mensaje de éxito si se ha pasado desde el backend -->
+    <% if (typeof successMessage !== "undefined" && successMessage) { %>
+        <div id="mensajeExitoso" class="text-lg text-[#008000] bg-[#e0ffe0] text-center m-auto p-3">
+            <%= successMessage %>
+            <button type="button" onclick="this.parentElement.classList.add('hidden')" class="absolute top-0 right-4">x</button>
+        </div>
+    <% } %>
+    
         <h2> Lista de Superheroes</h2>
         <table border="2" cellspacing="0" cellspacing="0" cellspadding="10" width="100%">
             <thead>
@@ -48,7 +57,7 @@
                             <button type="button" onclick="window.location.href='/api/view/editar/<%= superheroe._id %>'">Editar</button>
                             <br>
                             <br>
-                            <button type="button">Eliminar</button>
+                            <button type="button" onclick="window.location.href='/api/heroes/eliminar/id/<%= superheroe._id %>'">Eliminar</button>
                         </td>
                     </tr>
                     <% }) %>

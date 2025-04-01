@@ -132,8 +132,10 @@ export async function eliminarSuperheroePorIdController(req, res) {
             return res.status(404).send({ mensaje: 'Superhéroe a eliminar no encontrado.' });
         }
 
-        const superheroeFormateado = renderizarSuperheroe(superheroeEliminado);
-        res.status(200).json(superheroeFormateado);
+        res.render('dashboard', { successMessage: '¡Superhéroe creado exitosamente!' })
+
+        /*const superheroeFormateado = renderizarSuperheroe(superheroeEliminado);
+        res.status(200).json(superheroeFormateado);*/
 
     } catch (error) {
         res.status(500).send({ mensaje: 'Error al eliminar el superhéroe', error: error.message });
