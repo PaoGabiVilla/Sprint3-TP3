@@ -1,10 +1,10 @@
+<!-- Declaración del tipo de documento y estructura básica de HTML -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/deleteHero.js"></script>
-    
+    <meta charset="UTF-8"> <!-- Configuración de codificación de caracteres -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuración para hacer la página responsive -->
+    <script src="/js/deleteHero.js"></script> <!-- Importación del script para eliminar superhéroes -->
     <title>Superheroes</title>
 </head>
 <body>
@@ -12,58 +12,64 @@
     <!-- Mostrar mensaje de éxito si se ha pasado desde el backend -->
     <% if (typeof successMessage !== "undefined" && successMessage) { %>
         <div id="mensajeExitoso" class="text-lg text-[#008000] bg-[#e0ffe0] text-center m-auto p-3">
-            <%= successMessage %>
+            <%= successMessage %> <!-- Mensaje de éxito dinámico -->
             <button type="button" onclick="this.parentElement.classList.add('hidden')" class="absolute top-0 right-4">x</button>
+            <!-- Botón para cerrar el mensaje -->
         </div>
     <% } %>
     
-        <h2> Lista de Superheroes</h2>
-        <table border="2" cellspacing="0" cellspacing="0" cellspadding="10" width="100%">
-            <thead>
-                <tr>
-                <th>Super Heroes: </th>
-                <th>Nombre Real: </th>
-                <th>Edad: </th>
-                <th>Planeta de Origen: </th>
-                <th>Debilidad: </th>
-                <th>Poderes: </th>
-                <th>Aliados: </th>
-                <th>Enemigos: </th>
+    <h2> Lista de Superhéroes</h2>
+    <table border="2" cellspacing="0" cellspacing="0" cellspadding="10" width="100%">
+        <thead>
+            <tr>
+                <th>Super Héroes:</th>
+                <th>Nombre Real:</th>
+                <th>Edad:</th>
+                <th>Planeta de Origen:</th>
+                <th>Debilidad:</th>
+                <th>Poderes:</th>
+                <th>Aliados:</th>
+                <th>Enemigos:</th>
                 <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iteración sobre la lista de superhéroes obtenida del backend -->
+            <% superheroes.forEach(superheroe => { %>
+                <tr>
+                    <td><%= superheroe.nombreSuperHeroe %></td> <!-- Nombre del superhéroe -->
+                    <td><%= superheroe.nombreReal %></td> <!-- Nombre real -->
+                    <td><%= superheroe.edad %></td> <!-- Edad -->
+                    <td><%= superheroe.planetaOrigen %></td> <!-- Planeta de origen -->
+                    <td><%= superheroe.debilidad %></td> <!-- Debilidad -->
+                    <td>
+                        <!-- Iteración sobre la lista de poderes del superhéroe -->
+                        <% superheroe.poderes.forEach(poder => { %>
+                            <li><%= poder %></li>
+                        <% }) %>
+                    </td>
+                    <td>
+                        <!-- Iteración sobre la lista de aliados -->
+                        <% superheroe.aliados.forEach(aliado => { %>
+                            <li><%= aliado %></li>
+                        <% }) %>
+                    </td>
+                    <td>
+                        <!-- Iteración sobre la lista de enemigos -->
+                        <% superheroe.enemigos.forEach(enemigo => { %>
+                            <li><%= enemigo %></li>
+                        <% }) %>
+                    </td>
+                    <td>
+                        <!-- Botón para redirigir a la edición del superhéroe -->
+                        <button type="button" onclick="window.location.href='/api/view/editar/<%= superheroe._id %>'">Editar</button>
+                        <br><br>
+                        <!-- Botón para eliminar el superhéroe llamando a una función en deleteHero.js -->
+                        <button type="button" onclick="eliminarSuperheroe('<%= superheroe._id %>')">Eliminar</button>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <% superheroes.forEach(superheroe => { %>
-                    <tr>
-                        <td><%= superheroe.nombreSuperHeroe %></td>
-                        <td><%= superheroe.nombreReal %></td>
-                        <td><%= superheroe.edad %></td>
-                        <td><%= superheroe.planetaOrigen %></td>
-                        <td><%= superheroe.debilidad %></td>
-                        <td>
-                            <% superheroe.poderes.forEach(poder => { %>
-                               <li><%= poder %></li>
-                            <% }) %>
-                        </td>
-                        <td>
-                            <% superheroe.aliados.forEach(aliado => { %>
-                                <li><%= aliado %></li>
-                            <% }) %>
-                        </td>
-                        <td>
-                            <% superheroe.enemigos.forEach(enemigo => { %>
-                                <li><%= enemigo %></li>
-                            <% }) %>
-                        </td>
-                        <td>
-                            <button type="button" onclick="window.location.href='/api/view/editar/<%= superheroe._id %>'">Editar</button>
-                            <br>
-                            <br>
-                            <button type="button" onclick="eliminarSuperheroe('<%= superheroe._id %>')">Eliminar</button>
-                        </td>
-                    </tr>
-                    <% }) %>
-            </tbody>
-        </table>
+            <% }) %>
+        </tbody>
+    </table>
 </body>
 </html>

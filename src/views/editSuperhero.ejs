@@ -4,77 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Superhéroe</title>
+    
+    <!-- Importamos Tailwind CSS desde la CDN para estilizar la página -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', sans-serif; /* Aplicamos la fuente 'Inter' al cuerpo del documento */
         }
     </style>
 </head>
 <body class="font-sans bg-gray-100 flex items-center justify-center min-h-screen">
-    <!-- Mostrar mensaje de éxito si se ha pasado desde el backend -->
+    
+    <!-- Mostrar mensaje de éxito si se ha enviado desde el backend -->
     <% if (typeof successMessage !== "undefined" && successMessage) { %>
         <div id="mensajeExitoso" class="text-lg text-[#008000] bg-[#e0ffe0] text-center m-auto p-3">
-            <%= successMessage %>
+            <%= successMessage %> 
+            <!-- Botón para cerrar el mensaje de éxito -->
             <button type="button" onclick="this.parentElement.classList.add('hidden')" class="absolute top-0 right-4">x</button>
         </div>
     <% } %>
-    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg">
-        <h2 class="text-2xl font-bold text-center mb-4">Editar superheroe</h2>
 
+    <!-- Contenedor principal con estilos de Tailwind -->
+    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg">
+        <h2 class="text-2xl font-bold text-center mb-4">Editar superhéroe</h2>
+
+        <!-- Formulario para editar la información del superhéroe -->
         <form action="/api/heroes/editar/<%= superheroe._id %>?_method=PUT" method="POST" class="space-y-4">
-           
+            
+            <!-- Método PUT oculto para actualizar el recurso -->
             <input type="hidden" name="_method" value="PUT">
 
+            <!-- Campo: Nombre del Superhéroe -->
             <div>
                 <label for="nombreSuperHeroe" class="block font-semibold">Nombre del Superhéroe:</label>
-                <input type="text"  value="<%= superheroe.nombreSuperHeroe %>" id="nombreSuperHeroe" name="nombreSuperHeroe" required class="w-full border p-2 rounded">
+                <input type="text" value="<%= superheroe.nombreSuperHeroe %>" id="nombreSuperHeroe" name="nombreSuperHeroe" required class="w-full border p-2 rounded">
             </div>
 
+            <!-- Campo: Nombre Real -->
             <div>
                 <label for="nombreReal" class="block font-semibold">Nombre Real:</label>
                 <input type="text" value="<%= superheroe.nombreReal %>" id="nombreReal" name="nombreReal" required class="w-full border p-2 rounded">
             </div>
 
+            <!-- Campo: Edad -->
             <div>
                 <label for="edad" class="block font-semibold">Edad:</label>
                 <input type="number" value="<%= superheroe.edad %>" id="edad" name="edad" min="1" required class="w-full border p-2 rounded">
             </div>
 
+            <!-- Campo: Planeta de Origen -->
             <div>
                 <label for="planetaOrigen" class="block font-semibold">Planeta de Origen:</label>
                 <input type="text" value="<%= superheroe.planetaOrigen %>" id="planetaOrigen" name="planetaOrigen" required class="w-full border p-2 rounded">
             </div>
 
+            <!-- Campo: Debilidad -->
             <div>
                 <label for="debilidad" class="block font-semibold">Debilidad:</label>
-                <input type="text" value="<%= superheroe.debilidad %>" id="debilidad" name="debilidad" required class="w-full border p-2 rounded">
-            </div>
-
-            <div>
-                <label for="poderes" class="block font-semibold">Poderes:</label>
-                <textarea id="poderes"  name="poderes" required class="w-full border p-2 rounded h-24"><%= superheroe.poderes.join(', ') %></textarea>
-            </div>
-
-            <div>
-                <label for="aliados" class="block font-semibold">Aliados:</label>
-                <input type="text" value="<%= superheroe.aliados.join(', ') %>" id="aliados" name="aliados" class="w-full border p-2 rounded">
-            </div>
-
-            <div>
-                <label for="enemigos" class="block font-semibold">Enemigos:</label>
-                <input type="text" value="<%= superheroe.enemigos.join(', ') %>" id="enemigos" name="enemigos" class="w-full border p-2 rounded">
-            </div>
-
-            <div>
-                <label for="creador" class="block font-semibold">Creador:</label>
-                <input type="text" value="<%= superheroe.creador %>" id="creador" name="creador" class="w-full border p-2 rounded">
-            </div>
-
-            <button type="submit" class="w-full bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                Editar Superhéroe
-            </button>
-        </form>
-    </div>
-</body>
-</html>
+                <input type="text"

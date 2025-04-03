@@ -1,58 +1,57 @@
-//Importaciones
-import express from 'express';
+// Importaciones necesarias
+import express from 'express'; // Framework para construir aplicaciones web en Node.js
+import { connectDB } from './config/dbConfig.mjs'; // Importa la función para conectar a la base de datos
+import superHeroRoutes from './routes/superHeroRoutes.mjs'; // Importa las rutas relacionadas con los superhéroes
+import path from 'path'; // Módulo para manejar rutas de archivos y directorios
+import { fileURLToPath } from 'url'; // Convierte URL de módulos en rutas de archivos
 
-import { connectDB } from './config/dbConfig.mjs';
-import superHeroRoutes from './routes/superHeroRoutes.mjs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-//Ver esto - Sprint 3 parte 4:
+// Importación de method-override (Sprint 3 parte 4)
+// Permite que los formularios HTML realicen solicitudes PUT o DELETE mediante query params (_method)
 import methodOverride from "method-override";
 
-
-//Inicialización de la Aplicación
+// Inicialización de la aplicación Express
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Puerto en el que se ejecutará el servidor (3000 por defecto)
 
-// Spring 3 - TP3 //
-/* Convierte la URL del módulo en una ruta de archivo (fileURLToPath(import.meta.url))
-y obtiene el directorio del archivo actual (path.dirname(...)) */
-
-
-/***Configuración de Rutas y Motores de Vistas***/
+// **Configuración de rutas y motores de vistas**
+// Convierte la URL del módulo en una ruta de archivo y obtiene el directorio del archivo actual
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-/* Forma la ruta absoluta hacia views/, sin importar desde dónde se ejecute el script. */
+
+// Configura la carpeta donde estarán las vistas (templates) de la aplicación
 app.set('views', path.join(__dirname, 'views'));
-// Configuración de EJS como el motor de vistas en Express
+
+// Configura Express para usar EJS como motor de vistas
 app.set('view engine', 'ejs');
 
-/***Middlewares***/
-//Middleware para parsear JSON
-app.use(express.json());
-// Para procesar datos del formulario
-app.use(express.urlencoded({ extended: true }));
-// El formulario está enviando datos en formato application/x-www-form-urlencoded por defecto.
-//Sprint 3 parte 4: Cuando el formulario se envía con ?_method=PUT, Express lo interpretará como una petición PUT
+// **Middlewares**
 
+// Middleware para parsear JSON en las solicitudes
+app.use(express.json());
+
+// Middleware para procesar datos enviados desde formularios HTML
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware para servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname,"public")));
 
-// Configuración de method-override
+// Middleware para permitir métodos HTTP PUT y DELETE en formularios HTML (Sprint 3 parte 4)
 app.use(methodOverride("_method"));
 
-/***Conexión a la Base de Datos***/
-//Conexión a MongoDB
+// **Conexión a la Base de Datos**
+// Llamada a la función para conectar con MongoDB
 connectDB();
 
-/***Definición de Rutas***/
-//Configuración de ruta
+// **Definición de Rutas**
+// Configura las rutas relacionadas con los superhéroes bajo el prefijo '/api'
 app.use('/api', superHeroRoutes);
 
-//Manejo de errores para rutas no encontradas
-app.use((req, res) =>{
+// Middleware para manejar rutas no encontradas
+app.use((req, res) => {
     res.status(404).send({ mensaje: "Ruta no encontrada" });
 });
 
-//Iniciar el servidor
+// **Iniciar el servidor**
+// Pone el servidor en marcha y escucha peticiones en el puerto definido
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
