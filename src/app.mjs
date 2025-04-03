@@ -33,7 +33,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // El formulario está enviando datos en formato application/x-www-form-urlencoded por defecto.
 //Sprint 3 parte 4: Cuando el formulario se envía con ?_method=PUT, Express lo interpretará como una petición PUT
-app.use(methodOverride("_method"));
+
+app.use(express.static(path.join(__dirname,"public")));
 
 // Configuración de method-override
 app.use(methodOverride("_method"));

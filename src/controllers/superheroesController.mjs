@@ -89,11 +89,12 @@ export async function crearNuevoSuperheroeController(req, res) {
        
         //const superheroeFormateado = renderizarSuperheroe(superheroeCreado);
         //res.status(200).json(superheroeFormateado);
-        res.render('addSuperhero', { successMessage: '¡Superhéroe creado exitosamente!' });
+        const superheroesActualizados=await obtenerTodosLosSuperheroes();
+        res.render('dashboard', { superheroes: superheroesActualizados, successMessage: '¡Superhéroe creado exitosamente!' });
     } catch (error) {
         //res.status(500).send({ mensaje: 'error al crear nuevo superheroe' })
        
-        res.render('addSuperhero', {
+        res.render('dashboard', {
             errorMessage: 'Hubo un error al crear el superhéroe. Asegúrate de completar todos los campos correctamente.'
         }); 
     }
@@ -113,7 +114,8 @@ export async function actualizarSuperheroeController(req, res) {
         if (!superheroeActualizado) {
             return res.status(404).send({ mensaje: 'Superhéroe a actualizar no encontrado.' });
         }
-        res.render('editSuperhero', { superheroe: superheroeActualizado, successMessage: '¡Superhéroe editado exitosamente!' });
+        const superheroesActualizados=await obtenerTodosLosSuperheroes();
+        res.render('dashboard', { superheroes: superheroesActualizados, successMessage: '¡Superhéroe editado exitosamente!' });
         //const superheroeFormateado = renderizarSuperheroe(superheroeActualizado);
         //res.status(200).json(superheroeFormateado);
 
@@ -131,8 +133,8 @@ export async function eliminarSuperheroePorIdController(req, res) {
         if (!superheroeEliminado) {
             return res.status(404).send({ mensaje: 'Superhéroe a eliminar no encontrado.' });
         }
-
-        res.render('dashboard', { successMessage: '¡Superhéroe creado exitosamente!' })
+        const superheroesActualizados=await obtenerTodosLosSuperheroes();
+        res.render('dashboard', { superheroes: superheroesActualizados, successMessage: '¡Superhéroe creado exitosamente!' })
 
         /*const superheroeFormateado = renderizarSuperheroe(superheroeEliminado);
         res.status(200).json(superheroeFormateado);*/

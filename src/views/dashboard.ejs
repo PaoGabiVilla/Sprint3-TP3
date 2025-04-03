@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/deleteHero.js"></script>
+    
     <title>Superheroes</title>
 </head>
 <body>
@@ -57,7 +59,7 @@
                             <button type="button" onclick="window.location.href='/api/view/editar/<%= superheroe._id %>'">Editar</button>
                             <br>
                             <br>
-                            <button type="button" onclick="window.location.href='/api/heroes/eliminar/id/<%= superheroe._id %>'">Eliminar</button>
+                            <button type="button" onclick="eliminarSuperheroe('<%= superheroe._id %>')">Eliminar</button>
                         </td>
                     </tr>
                     <% }) %>
