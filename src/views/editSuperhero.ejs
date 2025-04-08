@@ -62,4 +62,38 @@
             <!-- Campo: Debilidad -->
             <div>
                 <label for="debilidad" class="block font-semibold">Debilidad:</label>
-                <input type="text"
+                <input type="text" value="<%= superheroe.debilidad %>" id="debilidad" name="debilidad" required class="w-full border p-2 rounded">
+            </div>
+
+            <!-- Campo: Poderes -->
+            <div>
+                <label for="poderes" class="block font-semibold">Poderes:</label>
+                <input type="text" value="<%= superheroe.poderes %>" id="poderes" name="poderes" required class="w-full border p-2 rounded">
+            </div>
+
+            <!-- Campo: Aliados -->
+            <div>
+                <label for="aliados" class="block font-semibold">Aliados:</label>
+                <input type="text" value="<%= superheroe.aliados %>" id="aliados" name="aliados" required class="w-full border p-2 rounded">
+            </div>
+
+            <!-- Campo: Enemigos -->
+            <div>
+                <label for="enemigos" class="block font-semibold">Enemigos:</label>
+                <input type="text" value="<%= superheroe.enemigos %>" id="enemigos" name="enemigos" required class="w-full border p-2 rounded">
+            </div>
+
+            <!-- Campo: Creador -->
+            <div>
+                <label for="creador" class="block font-semibold">Creador:</label>
+                <input type="text" value="<%= superheroe.creador %>" id="creador" name="creador" required class="w-full border p-2 rounded">
+            </div>
+            
+            <!-- Botón de envío para editar el superhéroe -->
+            <button type="submit" class="w-full bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                Editar Superhéroe
+            </button>
+        </form>
+    </div>
+</body>
+</form>
